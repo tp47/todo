@@ -10,13 +10,20 @@ import {
 import FieldLabel from "./FieldLabel";
 import Loading from "./Loading";
 
-interface TaskFormProps {
+/**
+ * Properties types for TaskForm component.
+ */
+export interface TaskFormProps {
   isEdit: boolean;
   setEditingTask: Function;
   setTasks: Function;
   task: ITask | null;
 }
 
+/**
+ * TaskForm component.
+ * @category Component.
+ */
 const TaskForm: FC<TaskFormProps> = ({
   isEdit,
   task,

@@ -5,6 +5,11 @@ import { db, storage } from "../firebase.config";
 import type { ITaskFormData, ITask } from "../types/task";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
+/**
+ * React custom hook for creating and updating tasks.
+ *
+ * @returns functions for creating and updating tasks and loading state.
+ */
 const useTask = () => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +30,11 @@ const useTask = () => {
         (err) => console.log(err),
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-            const doc = await insertTask({ ...task, file: url, completed: false });
+            const doc = await insertTask({
+              ...task,
+              file: url,
+              completed: false,
+            });
             setIsLoading(false);
             return doc;
           });
@@ -43,12 +52,13 @@ const useTask = () => {
       ...task,
     });
 
-    return {...task, id: docRef.id};
+    return { ...task, id: docRef.id };
   };
 
   const updateTask = async (task: ITask) => {
     setIsLoading(true);
     const { title, description, deadline } = task;
+    //@ts-ignore
     await updateDoc(doc(db, "tasks", task.id), {
       title,
       description,

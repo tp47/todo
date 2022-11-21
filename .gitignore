@@ -12,6 +12,10 @@ package-lock.json
 # production
 /build
 /src/firebase.config.js
+/.firebase
+.firebaserc
+firebase.json
+/docs
 
 # misc
 .DS_Store

@@ -1,6 +1,11 @@
-import type { FC } from "react";
+import type { FC, ReactElement } from "react";
 
-const Loading: FC = () => {
+/**
+ * Loading component
+ * @category Component
+ */
+
+const Loading: FC = (): ReactElement => {
   return (
     <div className="flex items-center justify-center bg-black opacity-80 fixed top-0 left-0 bottom-0 right-0">
       <svg

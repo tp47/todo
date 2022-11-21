@@ -1,11 +1,18 @@
 import { Reducer } from "react";
 import { ITaskFormData } from "../types/task";
 
+/**
+ * Task action types enum.
+ * @enum
+ */
 enum TaskActionTypes {
   CHANGE_TITLE = "change_title",
   CHANGE_DESCRIPTION = "change_description",
   CHANGE_DEADLINE = "change_date",
   CHANGE_FILE = "change_file",
+  /**
+   * Set a new state
+   */
   UPDATE_STATE = "update_state",
 }
 
@@ -42,6 +49,9 @@ interface UpdateState {
 
 type ReducerAction = ChangeFileAction | ChangeInputAction | UpdateState;
 
+/**
+ * Task form data state management reducer.
+ */
 const taskFormReducer: Reducer<ITaskFormData, ReducerAction> = (
   state = INITIAL_STATE,
   action
@@ -81,3 +91,10 @@ const taskFormReducer: Reducer<ITaskFormData, ReducerAction> = (
 };
 
 export { taskFormReducer, INITIAL_STATE, TaskActionTypes };
+export type {
+  ReducerAction,
+  ChangeInputAction,
+  ChangeFileAction,
+  UpdateState,
+  UpdateStatePayload,
+};

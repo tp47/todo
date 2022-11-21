@@ -8,7 +8,6 @@ import {
   doc,
   onSnapshot,
   query,
-  QuerySnapshot,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase.config";
@@ -38,27 +37,54 @@ const App: FC = () => {
     return () => unsub();
   }, []);
 
+  /**
+   * Delete the task by id
+   *
+   * @param id id of task for delete.
+   */
   const handleDelete = async (id: string) => {
     await deleteDoc(doc(db, "tasks", id));
   };
 
+  /**
+   * Change task
+   *
+   * @param task object of ITask type
+   */
   const handleEdit = (task: ITask) => {
     setEditingTask(task);
-  }
+  };
 
+  /**
+   * Change the 'completed' field in task
+   *
+   * @param task object of ITask type
+   */
   const handleComplete = async (task: ITask) => {
+    //@ts-ignore
     await updateDoc(doc(db, "tasks", task.id), {
       completed: !task.completed,
-    })
-  }
+    });
+  };
 
   return (
     <main className="flex items-center justify-center bg-purple-300 w-screen h-screen">
       <div className="w-5/6 h-5/6 bg-white rounded-xl p-3 flex flex-row">
-        <TaskForm isEdit={editingTask ? true : false} task={editingTask} setTasks={setTasks} setEditingTask={setEditingTask} />
+        <TaskForm
+          isEdit={editingTask ? true : false}
+          task={editingTask}
+          setTasks={setTasks}
+          setEditingTask={setEditingTask}
+        />
         <div className="flex flex-col gap-3 w-1/2 h-full overflow-scroll p-3">
           {tasks.map((task) => (
-            <Task key={task.id} task={task} handleDelete={handleDelete} handleEdit={handleEdit} handleComplete={handleComplete}/>
+            <Task
+              key={task.id}
+              task={task}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              handleComplete={handleComplete}
+            />
           ))}
         </div>
       </div>

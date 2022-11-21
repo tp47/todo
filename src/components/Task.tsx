@@ -6,13 +6,20 @@ import dayjs from "dayjs";
 
 import { ITask } from "../types/task";
 
-interface TaskProps {
+/*
+ * Properties types for Task Component
+ */
+export interface TaskProps {
   task: ITask;
   handleDelete: Function;
   handleEdit: Function;
   handleComplete: Function;
 }
 
+/**
+ * Task component
+ * @category Component
+ */
 const Task: FC<TaskProps> = ({
   task,
   handleDelete,
@@ -32,8 +39,14 @@ const Task: FC<TaskProps> = ({
       } flex flex-col p-3 rounded-lg shadow-md gap-2`}
     >
       <h3 className="font-bold">{task.title}</h3>
-      {task.description && <div className="text-sm">Описание: {task.description}</div>}
-      {task.deadline && <span className="text-sm">Крайний срок: {deadline.format('DD.MM.YYYY HH:mm')}</span>}
+      {task.description && (
+        <div className="text-sm">Описание: {task.description}</div>
+      )}
+      {task.deadline && (
+        <span className="text-sm">
+          Крайний срок: {deadline.format("DD.MM.YYYY HH:mm")}
+        </span>
+      )}
       {task.file && (
         <a href={task.file} target="_blank" rel="noreferrer">
           Прикрепленый файл
